@@ -2,9 +2,8 @@ import Appointment from "../models/Appointment.js"
 import { parse, formatISO, startOfDay, endOfDay, isValid } from 'date-fns'
 import { validateObjectId, handleNotFoundError, formatDate } from "../utils/index.js";
 import { sendEmailNewAppointment } from "../emails/appointmentEmailService.js";
-import { sendEmailUpdateAppointment } from "../emails/UpdateAppointmentEmailService.js";
 import { sendEmailCancelledAppointment } from "../emails/canceledAppointmentEmailService.js";
-
+import { sendEmailUpdateAppointment } from "../emails/UpdateAppointmentEmailService.js"; 
 
 
 const createAppointment = async (req, res) => {
