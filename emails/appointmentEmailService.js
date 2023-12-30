@@ -35,14 +35,14 @@ export async function sendEmailNewAppointment({date, time}){
         from: `${process.env.NOMBRE_NEGOCIO} <${process.env.EMAIL_USER}>`,
         to: `${process.env.EMAIL_ADMIN}`,
         subject: `${process.env.NOMBRE_NEGOCIO} - Nueva Cita`,
-        text:"Veterinaria - Tienes una nuevo turno asignado",
+        text:`${process.env.NOMBRE_NEGOCIO} - Tienes una nuevo turno asignado`,
         html: `<p>Hola: Admin, Tienes un nuevo turno</p>
             <p>Reservaron un nuevo turno para el dia: ${date} a las ${time} horas.</p>
            
         `
     })
 
-     console.log('Mensaje enviado', info.messageId)
+     
 }
 
 
