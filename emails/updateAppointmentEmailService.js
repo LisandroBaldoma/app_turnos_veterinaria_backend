@@ -3,22 +3,39 @@ import { createTransport } from '../config/nodemailer.js'
 
 export async function sendEmailUpdateAppointment({date, time}){  
     
-    const data = {
-        host: process.env.EMAIL_HOST,
-        port: process.env.EMAIL_PORT,
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    }
+    let data={}
+
+    if(process.env.ENTORNO == 'produccion'){
+         data = {
+            service: 'gmail',            
+            port: process.env.EMAIL_PORT,
+            secure: false,        
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+            },
+            tls:{
+                rejectUnAuthorized:false
+            }               
+        }
+    }else{
+         data = {            
+            host: process.env.EMAIL_HOST,
+            port: process.env.EMAIL_PORT,            
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS                         
+        }
+    }   
     
     const transporter = createTransport(
         data
     )    
     
     const info = await transporter.sendMail({
-        from: 'Veterinaria <citas@veterinaria.com>',
-        to: 'admin@correo.com',
-        subject: 'Veterinaria - Cita Actualizada',
-        text:"Veterinaria - Modificaron la reserva el turno",
+        from: `${process.env.NOMBRE_NEGOCIO} <${process.env.EMAIL_USER}>`,
+        to: `${process.env.EMAIL_ADMIN}`,
+        subject: `${process.env.NOMBRE_NEGOCIO} - Cita Actualizada`,
+        text:`${process.env.NOMBRE_NEGOCIO} - Modificaron la reserva del turno`,
         html: `<p>Hola: Admin, un paciente acualizo su turno</p>
             <p>Modificaron un turno para el dia: ${date} a las ${time} horas.</p>
            
