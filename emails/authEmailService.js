@@ -35,6 +35,7 @@ export async function sendEmailVerification({name, email, token}){
         data
     )    
     
+    try {
         const info = await transporter.sendMail({
             from: `${process.env.NOMBRE_NEGOCIO} <${process.env.EMAIL_USER}>`,
             to: email,
@@ -49,8 +50,13 @@ export async function sendEmailVerification({name, email, token}){
 
         
         console.log('Mensaje enviado', info.error)
-
         console.log('Mensaje enviado', info)
+    } catch (error) {
+        console.log(error)
+    }
+        
+
+        
         
     
 
