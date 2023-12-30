@@ -8,12 +8,10 @@ export async function sendEmailVerification({name, email, token}){
 
     if(process.env.ENTORNO == 'produccion'){
          data = {
-            service: 'gmail',            
-            port: process.env.EMAIL_PORT,
+            service: 'gmail',             
             secure: false,
             debug: true,
-            logger: true,
-            secureConnection: false,        
+            logger: true,                  
             auth: {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASS
