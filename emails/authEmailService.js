@@ -58,7 +58,7 @@ export async function sendEmailPasswordReset({name, email, token}){
 
     if(process.env.ENTORNO == 'produccion'){
          data = {
-            service: 'gmail',            
+            service: 'Gmail',            
             port: process.env.EMAIL_PORT,
             secure: false,        
             auth: {
