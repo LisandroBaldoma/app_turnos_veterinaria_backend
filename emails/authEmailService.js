@@ -6,6 +6,7 @@ export async function sendEmailVerification({name, email, token}){
     let data={}
 
     if(process.env.ENTORNO == 'produccion'){
+        console.log('ENTORNO----',process.env.ENTORNO)
          data = {
             service: 'gmail',            
             port: process.env.EMAIL_PORT,
@@ -18,7 +19,10 @@ export async function sendEmailVerification({name, email, token}){
                 rejectUnAuthorized:false
             }               
         }
+
+        console.log('DATA ----', data)
     }else{
+        console.log('PASO POR TEST------')
          data = {            
             host: process.env.EMAIL_HOST,
             port: process.env.EMAIL_PORT,            
