@@ -9,8 +9,11 @@ export async function sendEmailVerification({name, email, token}){
     if(process.env.ENTORNO == 'produccion'){
          data = {
             service: 'gmail',            
-            // port: process.env.EMAIL_PORT,
-            secure: false,        
+            port: process.env.EMAIL_PORT,
+            secure: false,
+            debug: true,
+            logger: true,
+            secureConnection: false,        
             auth: {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASS
@@ -47,7 +50,7 @@ export async function sendEmailVerification({name, email, token}){
         })
 
         
-        console.log('Mensaje enviado', info.messageId)
+        console.log('Mensaje enviado', info.error)
 
         console.log('Mensaje enviado', info)
         
