@@ -9,7 +9,7 @@ export async function sendEmailVerification({name, email, token}){
     if(process.env.ENTORNO == 'produccion'){
          data = {
             service: process.env.EMAIL_HOST,            
-            secure: false,
+            secure: true,
             debug: true,
             logger: true,                  
             auth: {
@@ -17,7 +17,8 @@ export async function sendEmailVerification({name, email, token}){
                 pass: process.env.EMAIL_PASS
             },
             tls:{
-                rejectUnAuthorized:false
+                rejectUnAuthorized:true,
+                minVersion: "TLSv1.2"
             }               
         }
     }else{
