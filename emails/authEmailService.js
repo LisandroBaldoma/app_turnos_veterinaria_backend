@@ -8,7 +8,7 @@ export async function sendEmailVerification({name, email, token}){
 
     if(process.env.ENTORNO == 'produccion'){
          data = {
-            service: 'gmail',             
+            service: process.env.EMAIL_HOST,            
             secure: false,
             debug: true,
             logger: true,                  
@@ -42,7 +42,7 @@ export async function sendEmailVerification({name, email, token}){
             subject: `${process.env.NOMBRE_NEGOCIO} - Confirma tu cuenta`,
             text:`${process.env.NOMBRE_NEGOCIO} - Confirma tu cuenta`,
             html: `<p>Hola: ${name}, confirma tu cuenta en Veterianria</p>
-                <p>Tu cuenta esta casi listam sole debes confirmarla en el siguiente enlace</p>
+                <p>Tu cuenta esta casi lista sole debes confirmarla en el siguiente enlace</p>
                 <a href="${process.env.FRONTEND_URL}/auth/confirmar-cuenta/${token}">Confirmar cuenta</a>
                 <p>Si tu no creaste esta cuenta, puedes ignorar este mensaje </p>
             `
