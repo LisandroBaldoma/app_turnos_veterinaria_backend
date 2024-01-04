@@ -9,17 +9,16 @@ export async function sendEmailVerification({name, email, token}){
     if(process.env.ENTORNO == 'produccion'){
          data = {
             service: process.env.EMAIL_HOST,            
-            secure: true,
+            secure: false,
             debug: true,
             logger: true,                  
             auth: {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASS
             },
-            tls:{
-                rejectUnAuthorized:true,
-                minVersion: "TLSv1.2"
-            }               
+            // tls:{
+            //     rejectUnAuthorized:false,                
+            // }               
         }
     }else{
          data = {            
@@ -38,7 +37,7 @@ export async function sendEmailVerification({name, email, token}){
     
     try {
         const info = await transporter.sendMail({
-            from: `${process.env.NOMBRE_NEGOCIO} <${process.env.EMAIL_USER}>`,
+            from: `${process.env.NOMBRE_NEGOCIO} ${process.env.EMAIL_USER}`,
             to: email,
             subject: `${process.env.NOMBRE_NEGOCIO} - Confirma tu cuenta`,
             text:`${process.env.NOMBRE_NEGOCIO} - Confirma tu cuenta`,
